@@ -107,7 +107,7 @@ class LinkItemField extends FormField
      **/
     public function getLinkID()
     {
-        return (int) $this->Value();
+        return (int) $this->getValue();
     }
     
     /**
@@ -119,7 +119,7 @@ class LinkItemField extends FormField
      **/
     public function getLinkPath()
     {
-        if($this->Value() > 0) return DataObject::get_by_id(LinkItem::class, $this->Value())->Link();
+        if($this->getValue() > 0) return DataObject::get_by_id(LinkItem::class, $this->getValue())->Link();
     }
     
     /**
