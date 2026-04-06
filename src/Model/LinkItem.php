@@ -10,7 +10,7 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataObject;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
@@ -156,11 +156,11 @@ class LinkItem extends DataObject
      * 
      * @since version 4.0.0
      *
-     * @return SilverStripe\Forms\RequiredFields
+     * @return SilverStripe\Forms\Validation\RequiredFieldsValidator
      **/
     public function getCMSValidator()
     {
-        return RequiredFields::create([
+        return RequiredFieldsValidator::create([
             'Title',
             'LinkType'
         ]);
