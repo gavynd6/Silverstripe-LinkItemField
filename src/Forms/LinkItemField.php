@@ -260,7 +260,7 @@ class LinkItemField extends FormField
     {
         $this->beforeExtending('updateValidate', function (ValidationResult $result) {
             if ((int) $this->getValue() < 1) {
-                $result->addFieldError($this->Name(), 'This field is required. Please add a link.');
+                $result->addFieldError($this->getName(), 'This field is required. Please add a link.');
             }
         });
         
