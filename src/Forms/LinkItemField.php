@@ -7,6 +7,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
 use SilverStripe\Core\Convert;
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldGroup;
@@ -253,21 +254,16 @@ class LinkItemField extends FormField
      * 
      * @since version 4.0.0
      *
-     * @var mixed $validator
-     * @return boolean
+     * @return ValidationResult
      **/
-    public function validate($validator)
+    public function validate(): ValidationResult
     {
-        if(!$validator->fieldIsRequired($this->getName())) return true;
+        $this->beforeExtending('updateValidate', function (ValidationResult $result) {
+            if ((int) $this->getValue() < 1) {
+                $result->addFieldError($this->Name(), 'This field is required. Please add a link.');
+            }
+        });
         
-        if($this->Value() < 1) {
-            $validator->validationError(
-                $this->getName(),
-                'This field is required. Please add a link.',
-                'validation'
-            );
-            return false;
-        }
-        return true;
+        return parent::validate();
     }
 }
